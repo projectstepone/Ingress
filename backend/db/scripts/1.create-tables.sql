@@ -12,7 +12,7 @@ CREATE TABLE `ingress`.`users` (
 ALTER TABLE `ingress`.`users` 
 ADD COLUMN `isAdmin` TINYINT NOT NULL DEFAULT 0 AFTER `isActive`;
 ALTER TABLE `ingress`.`users` 
-CHANGE COLUMN `isActive` `isActive` TINYINT NOT NULL DEFAULT 1 
+CHANGE COLUMN `isActive` `isActive` TINYINT NOT NULL DEFAULT 1 ;
 
 -- Create Form Schema table;
 
@@ -23,13 +23,12 @@ CREATE TABLE `ingress`.`formConfiguration` (
   `schema` JSON NULL,
   `created_by` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`form_config_id`),
-  UNIQUE INDEX `form_config_id_UNIQUE` (`form_config_id` ASC) VISIBLE,
-  INDEX `created_by_idx` (`created_by` ASC) VISIBLE,
+  UNIQUE INDEX `form_config_id_UNIQUE` (`form_config_id` ASC) ,
+  INDEX `created_by_idx` (`created_by` ASC) ,
   CONSTRAINT `created_by`
     FOREIGN KEY (`created_by`)
     REFERENCES `ingress`.`users` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
 
 
