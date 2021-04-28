@@ -1,5 +1,3 @@
-const dotenv = require( 'dotenv' );
-dotenv.config();
 const express = require( 'express' );
 const bodyParser = require( 'body-parser' );
 const app = express();
@@ -20,4 +18,4 @@ app.get( '/', ( req, res ) => {
 
 app.use( '/config', configRouter );
 
-app.listen( process.env.PORT, () => console.log( `Ingress backend server listening on ${process.env.PORT}` ) );
+app.listen( process.env.PORT || 4000, () => console.log( `Ingress backend server listening on ${process.env.PORT || 4000}` ) );

@@ -1,12 +1,14 @@
 const mysql = require( 'mysql' );
 
 // Create connection
-const connection = mysql.createConnection( {
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
+const dbConfig = {
+    host: 'ingress-mysql-db',
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASS,
     database: process.env.DATABASE
-} );
+};
+
+const connection = mysql.createConnection( dbConfig );
 
 connection.connect( ( err ) => {
     if ( err ) {

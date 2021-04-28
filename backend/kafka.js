@@ -1,8 +1,11 @@
 const { Kafka } = require( 'kafkajs' );
 
+const clientId = process.env.KAFKA_CLIENT_ID;
+const brokers = process.env.process.env.KAFKA_BROKERS.split( ',' );
+
 const kafka = new Kafka( {
-    clientId: process.env.CLIENT_ID,
-    brokers: process.env.BROKERS
+    clientId,
+    brokers
 } );
 
 
