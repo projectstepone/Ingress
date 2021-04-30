@@ -29,18 +29,6 @@ const fetchAConfig = ( req, res ) => {
     let configId = req.params.id;
 
     try {
-
-        // switch ( configId ) {
-        //     case "plasma-donation":
-        //         res.json( { status: 200, ...plasmaDonationSchema } );
-
-        //         break;
-
-        //     default:
-        //         res.json( { status: 404, message: "Not found" } );
-        //         break;
-        // }
-
         if ( listOfConfigs.includes( configId ) ) {
             res.json( configurations[configId] );
         } else {
