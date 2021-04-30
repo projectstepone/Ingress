@@ -30,7 +30,7 @@ const fetchAConfig = ( req, res ) => {
 
     try {
         if ( listOfConfigs.includes( configId ) ) {
-            res.json( configurations[configId] );
+            res.json( { status: 200, ...configurations[configId] } );
         } else {
             res.json( { status: 404, message: "Not found" } );
         }

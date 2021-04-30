@@ -16,13 +16,6 @@ const PublicFacingForm = () => {
     const [formId, setformId] = useState( null );
 
     useEffect( () => {
-        fetch();
-        return () => {
-
-        };
-    } );
-
-    let fetch = () => {
         var config = {
             method: 'get',
             url: `/config/${id}`,
@@ -34,19 +27,23 @@ const PublicFacingForm = () => {
 
         axios( config )
             .then( function ( response ) {
-                if ( response.data.status !== 200 || response.data.result.length === 0 ) {
+                if ( response.data.status !== 200 ) {
                     window.location = "/404";
                 }
 
-                let obj = response.data.result[0];
-                setformId( obj.form_config_id );
-                setSchema( JSON.parse( obj.schema ) );
+                console.log( response.data.id );
+
+                setformId( response.data.id );
+                setSchema( response.data.item[0] );
 
             } )
             .catch( function ( error ) {
                 console.log( error );
             } );
-    };
+        return () => {
+
+        };
+    }, [id] );
 
 
     const onFinish = ( values ) => {
@@ -81,10 +78,10 @@ const PublicFacingForm = () => {
                             <Col offset={6} span={12} style={{ "textAlign": "center" }}>
                                 <Divider orientation="center" style={{ "width": "100%" }} />
                                 <h2>
-                                    {schema.item[0].title}
+                                    {schema.title}
                                 </h2>
                                 <h4>
-                                    {schema.item[0].description}
+                                    {schema.description}
                                 </h4>
                                 <Divider orientation="center" style={{ "width": "100%" }} />
                             </Col>
@@ -101,7 +98,7 @@ const PublicFacingForm = () => {
                                     onFinish={onFinish}
                                     onFinishFailed={onFinishFailed}
                                 >
-                                    {( schema.item[0].groups[0].fields.map( ( field, index ) => (
+                                    {( schema.groups[0].fields.map( ( field, index ) => (
                                         <div key={index}>
                                             <FormCompositionHandler fieldContext={field} />
                                         </div>

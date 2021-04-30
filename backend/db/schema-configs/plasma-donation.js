@@ -1,5 +1,5 @@
 const plasmaDonationSchema = {
-    "id": "generic-schema",
+    "id": "plasma-donation",
     "item": [
         {
             "devNote": "",
