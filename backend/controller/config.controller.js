@@ -1,23 +1,41 @@
-var mysql = require( 'mysql' );
-const db = require( '../db/connection' );
-const { v4: uuidv4 } = require( 'uuid' );
+const fs = require( 'fs' );
+const path = require( 'path' );
+
+
+// Dynamic loading of configs into runtime
+const listOfConfigs = [];
+const configurations = {};
+
+fs.readdir( path.join( __dirname, '../db/schema-configs' ), ( err, files ) => {
+    if ( err )
+        console.log( err );
+    else {
+        console.log( "List of loaded configurations" );
+        files.forEach( file => {
+            console.log( file );
+
+            const nameOfConfig = file.split( '.js' )[0];
+            listOfConfigs.push( nameOfConfig );
+            const schema = require( path.join( __dirname, `../db/schema-configs/${file}` ) );
+            configurations[nameOfConfig] = schema;
+        } );
+    }
+} );
+
+
+
 
 const fetchAConfig = ( req, res ) => {
     let configId = req.params.id;
 
     try {
-        let sql = `SELECT * FROM ingress.formConfiguration WHERE form_config_id = ?;`;
-        let inserts = [configId];
-        let query = mysql.format( sql, inserts );
+        if ( listOfConfigs.includes( configId ) ) {
+            res.json( configurations[configId] );
+        } else {
+            res.json( { status: 404, message: "Not found" } );
+        }
 
-        db.query( query, ( error, result, sqlFields ) => {
-            if ( error ) {
-                res.json( { status: 400, error } );
-            }
-            else {
-                res.json( { status: 200, result } );
-            }
-        } );
+
     } catch ( error ) {
         res.json( { status: 500, error } );
     }
