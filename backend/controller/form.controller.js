@@ -1,6 +1,7 @@
 const fs = require( 'fs' );
 const path = require( 'path' );
 
+const { addToKafkaQueue } = require( '../kafka' );
 
 // Dynamic loading of configs into runtime
 const listOfConfigs = [];
@@ -19,13 +20,18 @@ fs.readdir( path.join( __dirname, '../db/schema-configs' ), ( err, files ) => {
     }
 } );
 
-const formSubmission = (req, res) => {
+const formSubmission = ( req, res ) => {
     let formId = req.params.id;
 
     try {
         if ( listOfConfigs.includes( formId ) ) {
             // Process it to kafka
-            res.json( { status: 200, ...configurations[formId] } );
+            addToKafkaQueue( formId, req.body ).then( () => {
+                res.json( { status: 200 } );
+            } ).catch( err => {
+                res.json( { status: 500, message: "An Error occurred on the backend" } );
+            } );
+
         } else {
             res.json( { status: 400, message: "Bad Request" } );
         }
