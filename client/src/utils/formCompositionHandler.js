@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from "prop-types";
 
-import { Form, Input, Checkbox, Radio, Row, Col, Select, DatePicker, Space } from 'antd';
+import { Form, Input, Checkbox, Radio, Row, Col, Select, DatePicker, TimePicker } from 'antd';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -133,10 +133,18 @@ const formCompositionHandler = ( props ) => {
                                 name={fieldContext.id}
                                 rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                             >
-                                <DatePicker style={{ "width": "100%" }} format={'DD/MM/YYYY'} />
+                                <DatePicker style={{ "width": "100%" }} format={'DD/MM/YYYY'} allowClear={true} />
                             </Form.Item> );
                     case "time":
-                        break;
+                        return (
+                            <Form.Item
+                                label={fieldContext.label}
+                                name={fieldContext.id}
+                                rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
+                            >
+                                <TimePicker style={{ "width": "100%" }} mode="time" allowClear={true} format="hh:mm a" />
+                            </Form.Item>
+                        );
                     default:
                         // Show nothing if type does not match any of predefined items in schema 
                         break;
