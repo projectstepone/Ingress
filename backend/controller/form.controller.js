@@ -1,6 +1,7 @@
 const fs = require( 'fs' );
 const path = require( 'path' );
 
+const { addToKafkaQueue } = require( '../kafka' );
 
 // Dynamic loading of configs into runtime
 const listOfConfigs = [];
@@ -10,10 +11,7 @@ fs.readdir( path.join( __dirname, '../db/schema-configs' ), ( err, files ) => {
     if ( err )
         console.log( err );
     else {
-        console.log( "List of loaded configurations" );
         files.forEach( file => {
-            console.log( file );
-
             const nameOfConfig = file.split( '.js' )[0];
             listOfConfigs.push( nameOfConfig );
             const schema = require( path.join( __dirname, `../db/schema-configs/${file}` ) );
@@ -22,24 +20,26 @@ fs.readdir( path.join( __dirname, '../db/schema-configs' ), ( err, files ) => {
     }
 } );
 
-
-
-
-const fetchAConfig = ( req, res ) => {
-    let configId = req.params.id;
+const formSubmission = ( req, res ) => {
+    let formId = req.params.id;
 
     try {
-        if ( listOfConfigs.includes( configId ) ) {
-            res.json( { status: 200, ...configurations[configId] } );
-        } else {
-            res.json( { status: 404, message: "Not found" } );
-        }
+        if ( listOfConfigs.includes( formId ) ) {
+            // Process it to kafka
+            addToKafkaQueue( formId, req.body ).then( () => {
+                res.json( { status: 200 } );
+            } ).catch( err => {
+                res.json( { status: 500, message: "An Error occurred on the backend" } );
+            } );
 
+        } else {
+            res.json( { status: 400, message: "Bad Request" } );
+        }
 
     } catch ( error ) {
         res.json( { status: 500, error } );
     }
 };
 
-module.exports = { fetchAConfig };
+module.exports = { formSubmission };
 

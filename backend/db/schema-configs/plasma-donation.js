@@ -1,5 +1,5 @@
 const plasmaDonationSchema = {
-    "id": "generic-schema",
+    "id": "plasma-donation",
     "item": [
         {
             "devNote": "",
@@ -12,7 +12,7 @@ const plasmaDonationSchema = {
                     "fields": [
                         {
                             "label": "Name",
-                            "id": "",
+                            "id": "name",
                             "description": null,
                             "type": "short_answer",
                             "args": [],
@@ -22,6 +22,7 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Gender",
+                            "id": "gender",
                             "description": null,
                             "type": "dropdown",
                             "args": [
@@ -35,8 +36,9 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Date Of Birth",
+                            "id": "dateOfBirth",
                             "description": null,
-                            "type": "short_answer",
+                            "type": "date",
                             "args": [],
                             "validators": [],
                             "answerType": [],
@@ -44,6 +46,7 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Mobile Number",
+                            "id": "phone",
                             "description": null,
                             "type": "short_answer",
                             "args": [],
@@ -53,6 +56,7 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Alternate Mobile Number",
+                            "id": 'altPhone',
                             "description": null,
                             "type": "short_answer",
                             "args": [],
@@ -62,6 +66,7 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "City",
+                            "id": "city",
                             "description": null,
                             "type": "short_answer",
                             "args": [],
@@ -71,6 +76,7 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "State",
+                            "id": "state",
                             "description": null,
                             "type": "dropdown",
                             "args": [
@@ -117,6 +123,7 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "PinCode",
+                            "id": "pinCode",
                             "description": null,
                             "type": "short_answer",
                             "args": [],
@@ -126,6 +133,7 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Have you donated Plasma before",
+                            "id": "hasDonatedPlasma",
                             "description": null,
                             "type": "dropdown",
                             "args": [
@@ -138,8 +146,9 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Date of testing Covid Positive",
+                            "id": "positiveDate",
                             "description": null,
-                            "type": "short_answer",
+                            "type": "date",
                             "args": [],
                             "validators": [],
                             "answerType": [],
@@ -147,8 +156,10 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Date of Last Plasma donation",
+
+                            "id": "lastDonationDate",
                             "description": null,
-                            "type": "short_answer",
+                            "type": "date",
                             "args": [],
                             "validators": [],
                             "answerType": [],
@@ -156,8 +167,9 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Preferred Date for Plasma donation",
+                            "id": "preferredDonationDate",
                             "description": null,
-                            "type": "short_answer",
+                            "type": "date",
                             "args": [],
                             "validators": [],
                             "answerType": [],
@@ -165,8 +177,9 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Preferred Time for Plasma donation",
+                            "id": "preferedDonationTime",
                             "description": null,
-                            "type": "short_answer",
+                            "type": "time",
                             "args": [],
                             "validators": [],
                             "answerType": [],
@@ -174,6 +187,7 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Do you need a cab ?",
+                            "id": "cabrequired",
                             "description": null,
                             "type": "dropdown",
                             "args": [
@@ -186,6 +200,7 @@ const plasmaDonationSchema = {
                         },
                         {
                             "label": "Address",
+                            "id": "address",
                             "description": null,
                             "type": "paragraph",
                             "args": [],

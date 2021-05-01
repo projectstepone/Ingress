@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import { Row, Col } from 'antd';
-import { Form, Checkbox, Button, Image, Divider } from 'antd';
+import { Form, Checkbox, Button, Image, Divider, Modal, Row, Col } from 'antd';
 
 import axios from 'axios';
 
@@ -14,16 +13,10 @@ const PublicFacingForm = () => {
 
     const [schema, setSchema] = useState( null );
     const [formId, setformId] = useState( null );
+    const [isModalVisible, setIsModalVisible] = useState( { state: false, context: null, message: null } );
 
     useEffect( () => {
-        fetch();
-        return () => {
-
-        };
-    } );
-
-    let fetch = () => {
-        var config = {
+        let config = {
             method: 'get',
             url: `/config/${id}`,
             headers: {
@@ -34,25 +27,53 @@ const PublicFacingForm = () => {
 
         axios( config )
             .then( function ( response ) {
-                if ( response.data.status !== 200 || response.data.result.length === 0 ) {
+                if ( response.data.status !== 200 ) {
                     window.location = "/404";
                 }
 
-                let obj = response.data.result[0];
-                setformId( obj.form_config_id );
-                setSchema( JSON.parse( obj.schema ) );
+                console.log( response.data.id );
+
+                setformId( response.data.id );
+                setSchema( response.data.item[0] );
 
             } )
             .catch( function ( error ) {
                 console.log( error );
             } );
-    };
+        return () => {
 
+        };
+    }, [id] );
 
     const onFinish = ( values ) => {
-        console.log( 'Success:', values, formId );
 
+        console.log( JSON.stringify( values, null, 2 ) );
+        // mapFormSubmissionValues( formId, values );
         // Show an Indication that the form was submitted and send to Homepage
+
+        let config = {
+            method: 'post',
+            url: `/form/${id}`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: { formId, values }
+        };
+
+        axios( config )
+            .then( function ( response ) {
+                if ( response.data.status !== 200 ) {
+                    // Show error
+                    setIsModalVisible( { state: true, context: "Error", message: "There seems to be an error with your form submission. Kindly try again. Thank you" } );
+
+                } else {
+                    // Show success message and redirect
+                    setIsModalVisible( { state: true, context: "Success", message: "Thank you for submitting your details. We shall reach out to you soon." } );
+                }
+            } )
+            .catch( function ( error ) {
+                console.log( error );
+            } );
     };
 
     const onFinishFailed = ( errorInfo ) => {
@@ -74,6 +95,10 @@ const PublicFacingForm = () => {
                 </Col>
             </Row>
 
+            {isModalVisible.state
+                &&
+                <Modal title={isModalVisible.context} visible={isModalVisible.state} footer={null} closable={false} >{isModalVisible.message} </Modal>
+            }
             {
                 schema == null ? null : (
                     <>
@@ -81,10 +106,10 @@ const PublicFacingForm = () => {
                             <Col offset={6} span={12} style={{ "textAlign": "center" }}>
                                 <Divider orientation="center" style={{ "width": "100%" }} />
                                 <h2>
-                                    {schema.item[0].title}
+                                    {schema.title}
                                 </h2>
                                 <h4>
-                                    {schema.item[0].description}
+                                    {schema.description}
                                 </h4>
                                 <Divider orientation="center" style={{ "width": "100%" }} />
                             </Col>
@@ -101,7 +126,7 @@ const PublicFacingForm = () => {
                                     onFinish={onFinish}
                                     onFinishFailed={onFinishFailed}
                                 >
-                                    {( schema.item[0].groups[0].fields.map( ( field, index ) => (
+                                    {( schema.groups[0].fields.map( ( field, index ) => (
                                         <div key={index}>
                                             <FormCompositionHandler fieldContext={field} />
                                         </div>

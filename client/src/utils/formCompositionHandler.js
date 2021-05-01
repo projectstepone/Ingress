@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from "prop-types";
 
-import { Form, Input, Checkbox, Radio, Row, Col, Select } from 'antd';
+import { Form, Input, Checkbox, Radio, Row, Col, Select, DatePicker, TimePicker } from 'antd';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -43,7 +43,7 @@ const formCompositionHandler = ( props ) => {
                             <div>
                                 <Form.Item
                                     label={fieldContext.label}
-                                    name={fieldContext.label}
+                                    name={fieldContext.id}
                                     rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                                 >
                                     <Input />
@@ -58,7 +58,7 @@ const formCompositionHandler = ( props ) => {
                             <div>
                                 <Form.Item
                                     label={fieldContext.label}
-                                    name={fieldContext.label}
+                                    name={fieldContext.id}
                                     rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                                 >
                                     <TextArea placeholder={props.placeholder} rows={4} />
@@ -70,7 +70,7 @@ const formCompositionHandler = ( props ) => {
                         return (
                             <Form.Item
                                 label={fieldContext.label}
-                                name={fieldContext.label}
+                                name={fieldContext.id}
                                 rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                             >
                                 <Radio.Group>
@@ -89,7 +89,7 @@ const formCompositionHandler = ( props ) => {
                         return (
                             <Form.Item
                                 label={fieldContext.label}
-                                name={fieldContext.label}
+                                name={fieldContext.id}
                                 rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                             >
                                 <Checkbox.Group style={{ width: '100%' }} >
@@ -107,7 +107,7 @@ const formCompositionHandler = ( props ) => {
                         return (
                             <Form.Item
                                 label={fieldContext.label}
-                                name={fieldContext.label}
+                                name={fieldContext.id}
                                 rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                             >
                                 <Select
@@ -127,9 +127,24 @@ const formCompositionHandler = ( props ) => {
                         );
 
                     case "date":
-                        break;
+                        return (
+                            <Form.Item
+                                label={fieldContext.label}
+                                name={fieldContext.id}
+                                rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
+                            >
+                                <DatePicker style={{ "width": "100%" }} format={'DD/MM/YYYY'} allowClear={true} />
+                            </Form.Item> );
                     case "time":
-                        break;
+                        return (
+                            <Form.Item
+                                label={fieldContext.label}
+                                name={fieldContext.id}
+                                rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
+                            >
+                                <TimePicker style={{ "width": "100%" }} mode="time" allowClear={true} format="hh:mm a" />
+                            </Form.Item>
+                        );
                     default:
                         // Show nothing if type does not match any of predefined items in schema 
                         break;
