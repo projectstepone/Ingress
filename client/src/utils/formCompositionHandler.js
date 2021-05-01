@@ -43,7 +43,7 @@ const formCompositionHandler = ( props ) => {
                             <div>
                                 <Form.Item
                                     label={fieldContext.label}
-                                    name={fieldContext.label}
+                                    name={fieldContext.id}
                                     rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                                 >
                                     <Input />
@@ -58,7 +58,7 @@ const formCompositionHandler = ( props ) => {
                             <div>
                                 <Form.Item
                                     label={fieldContext.label}
-                                    name={fieldContext.label}
+                                    name={fieldContext.id}
                                     rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                                 >
                                     <TextArea placeholder={props.placeholder} rows={4} />
@@ -70,7 +70,7 @@ const formCompositionHandler = ( props ) => {
                         return (
                             <Form.Item
                                 label={fieldContext.label}
-                                name={fieldContext.label}
+                                name={fieldContext.id}
                                 rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                             >
                                 <Radio.Group>
@@ -89,7 +89,7 @@ const formCompositionHandler = ( props ) => {
                         return (
                             <Form.Item
                                 label={fieldContext.label}
-                                name={fieldContext.label}
+                                name={fieldContext.id}
                                 rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                             >
                                 <Checkbox.Group style={{ width: '100%' }} >
@@ -107,7 +107,7 @@ const formCompositionHandler = ( props ) => {
                         return (
                             <Form.Item
                                 label={fieldContext.label}
-                                name={fieldContext.label}
+                                name={fieldContext.id}
                                 rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
                             >
                                 <Select
