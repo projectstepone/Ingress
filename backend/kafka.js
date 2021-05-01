@@ -12,10 +12,10 @@ const kafka = new Kafka( {
 
 const producer = kafka.producer();
 
-await producer.connect();
 
 const addToKafkaQueue = async ( formConfigId, messageValue, topic = topic ) => {
     try {
+        await producer.connect();
         await producer.send( {
             topic: topic,
             messages: [
