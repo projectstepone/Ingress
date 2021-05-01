@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from "prop-types";
 
-import { Form, Input, Checkbox, Radio, Row, Col, Select } from 'antd';
+import { Form, Input, Checkbox, Radio, Row, Col, Select, DatePicker, Space } from 'antd';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -127,7 +127,14 @@ const formCompositionHandler = ( props ) => {
                         );
 
                     case "date":
-                        break;
+                        return (
+                            <Form.Item
+                                label={fieldContext.label}
+                                name={fieldContext.id}
+                                rules={[{ required: fieldContext.required, message: 'This is a required field' }]}
+                            >
+                                <DatePicker style={{ "width": "100%" }} format={'DD/MM/YYYY'} />
+                            </Form.Item> );
                     case "time":
                         break;
                     default:
