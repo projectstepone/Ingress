@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import { Row, Col } from 'antd';
-import { Form, Checkbox, Button, Image, Divider } from 'antd';
+import { Form, Checkbox, Button, Image, Divider, Modal, Row, Col } from 'antd';
 
 import axios from 'axios';
 
@@ -14,9 +13,10 @@ const PublicFacingForm = () => {
 
     const [schema, setSchema] = useState( null );
     const [formId, setformId] = useState( null );
+    const [isModalVisible, setIsModalVisible] = useState( { state: false, context: null, message: null } );
 
     useEffect( () => {
-        var config = {
+        let config = {
             method: 'get',
             url: `/config/${id}`,
             headers: {
@@ -45,11 +45,35 @@ const PublicFacingForm = () => {
         };
     }, [id] );
 
-
     const onFinish = ( values ) => {
-        console.log( 'Success:', values, formId );
 
+        console.log( JSON.stringify( values, null, 2 ) );
+        // mapFormSubmissionValues( formId, values );
         // Show an Indication that the form was submitted and send to Homepage
+
+        let config = {
+            method: 'post',
+            url: `/form/${id}`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: { formId, values }
+        };
+
+        axios( config )
+            .then( function ( response ) {
+                if ( response.data.status !== 200 ) {
+                    // Show error
+                    setIsModalVisible( { state: true, context: "Error", message: "There seems to be an error with your form submission. Kindly try again. Thank you" } );
+
+                } else {
+                    // Show success message and redirect
+                    setIsModalVisible( { state: true, context: "Success", message: "Thank you for submitting your details. We shall reach out to you soon." } );
+                }
+            } )
+            .catch( function ( error ) {
+                console.log( error );
+            } );
     };
 
     const onFinishFailed = ( errorInfo ) => {
@@ -71,6 +95,10 @@ const PublicFacingForm = () => {
                 </Col>
             </Row>
 
+            {isModalVisible.state
+                &&
+                <Modal title={isModalVisible.context} visible={isModalVisible.state} footer={null} closable={false} >{isModalVisible.message} </Modal>
+            }
             {
                 schema == null ? null : (
                     <>
