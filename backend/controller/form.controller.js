@@ -33,6 +33,7 @@ const formSubmission = ( req, res ) => {
             } );
 
         } else {
+            console.log("Invalid id");
             res.json( { status: 400, message: "Bad Request" } );
         }
 

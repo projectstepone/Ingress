@@ -1,8 +1,13 @@
 const { Kafka } = require( 'kafkajs' );
 
-const clientId = process.env.KAFKA_CLIENT_ID;
-const brokers = process.env.KAFKA_BROKERS.split( ',' );
-const topic = process.env.KAFKA_TOPIC;
+const configPath = process.env.CONFIG_PATH
+                    ? process.env.CONFIG_PATH
+                    : "../configs/ingress.json"
+const config = require(configPath)
+
+const clientId = config.kafka.clientId;
+const brokers = config.kafka.brokers;
+const topic = config.kafka.defaultTopic;
 
 const kafka = new Kafka( {
     clientId,
