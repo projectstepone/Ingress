@@ -16,6 +16,9 @@ const PublicFacingForm = () => {
     const [isModalVisible, setIsModalVisible] = useState( { state: false, context: null, message: null } );
 
     useEffect( () => {
+
+        document.title = id;
+
         let config = {
             method: 'get',
             url: `/config/${id}`,
