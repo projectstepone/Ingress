@@ -1,0 +1,7 @@
+{
+  "kafka" : {
+    "brokers" : "localhost:9092",
+    "clientId" : "ingress-server",
+    "defaultTopic" : "ingress_data"
+  }
+}

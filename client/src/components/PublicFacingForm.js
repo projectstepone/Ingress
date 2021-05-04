@@ -62,7 +62,7 @@ const PublicFacingForm = () => {
 
         axios( config )
             .then( function ( response ) {
-                if ( response.data.status !== 200 ) {
+                if ( response.status !== 200 ) {
                     // Show error
                     setIsModalVisible( { state: true, context: "Error", message: "There seems to be an error with your form submission. Kindly try again. Thank you" } );
 
