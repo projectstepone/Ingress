@@ -2,12 +2,15 @@ const express = require( 'express' );
 const bodyParser = require( 'body-parser' );
 const app = express();
 const path = require( 'path' );
+const morgan = require('morgan')
+
 
 const configRouter = require( './router/config.router' );
 const formRouter = require( './router/form.router' );
-app.use(express.static('build'))
+app.use(express.static(path.join(__dirname, "build")))
 
 app.use( bodyParser.json() );
+app.use(morgan("combined"));
 
 app.use( '/config', configRouter );
 app.use( '/form', formRouter );

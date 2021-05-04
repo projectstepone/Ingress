@@ -29,6 +29,7 @@ const formSubmission = ( req, res ) => {
             addToKafkaQueue( formId, req.body ).then( () => {
                 res.json( { status: 200 } );
             } ).catch( err => {
+                console.log("Error: " + err);
                 res.json( { status: 500, message: "An Error occurred on the backend" } );
             } );
 

@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "rm -rf ../backend/build",
     "build": "react-scripts build",
     "postbuild" : "mv -f build ../backend/",
     "test": "react-scripts test",

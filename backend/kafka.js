@@ -1,4 +1,4 @@
-const { Kafka } = require( 'kafkajs' );
+const kafka = require('kafka-node')
 
 const configPath = process.env.CONFIG_PATH
                     ? process.env.CONFIG_PATH
@@ -9,26 +9,28 @@ const clientId = config.kafka.clientId;
 const brokers = config.kafka.brokers;
 const topic = config.kafka.defaultTopic;
 
-const kafka = new Kafka( {
-    clientId,
-    brokers
-} );
+const client = new kafka.KafkaClient({kafkaHost: brokers});
 
+const producer = new kafka.HighLevelProducer(client, {
+    requireAcks: -1,
+    ackTimeoutMs: 100,
+    partitionerType: 2
+});
 
-const producer = kafka.producer();
-
-
-const addToKafkaQueue = async ( formConfigId, messageValue, topic = topic ) => {
+ const addToKafkaQueue = async ( formConfigId, messageValue ) => {
     try {
-        await producer.connect();
-        await producer.send( {
+       await producer.send( [{
             topic: topic,
-            messages: [
-                { body: messageValue, id: formConfigId },
-            ],
-        } );
-    } catch ( error ) {
-        throw error;
+            messages: JSON.stringify( { body: messageValue, id: formConfigId })
+        }] , function (err, data) {
+            if(data) return true;
+            if(err)  {
+                console.log("Error: " + err);
+                return false;
+            }
+        });
+    } catch( error ) {
+        console.error("Error" + e);
     }
 };
 
