@@ -1,27 +1,18 @@
 # base image
 FROM node:14
 
-# set working directory
-WORKDIR /ingress
-
-# add `/ingress/node_modules/.bin` to $PATH
-ENV PATH /ingress/node_modules/.bin:$PATH
+ENV PATH node_modules/.bin:$PATH
 
 # install and cache ingress dependencies
-COPY ./client/package*.json /ingress/client/
-RUN npm install
+COPY client client
 
-COPY ./backend/package*.json /ingress/backend/
-RUN npm install
+COPY backend backend
 
-# RUN npm install -g @angular/cli@7.3.9 pm2
+RUN cd client && npm install --production --silent && npm run build && cd .. && rm -rf client
 
-# add ingress
-COPY ./client/ /ingress/client/
-COPY ./backend/ /ingress/backend/
+RUN cd backend && npm install --production --silent && npm i pm2
 
-# RUN ng build --prod
-CMD cd ./client && npm run build
+COPY configs configs
 
 # start backend
-CMD cd ./backend && NODE_ENV=production pm2-runtime server.js
+CMD cd backend && NODE_ENV=production pm2-runtime server.js
