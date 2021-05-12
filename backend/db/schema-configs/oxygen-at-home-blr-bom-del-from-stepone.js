@@ -5,8 +5,8 @@ const oxygenAtHomeforBlrBomDelFromStepone = {
             "devNote": "",
             "Header": {},
             "Footer": {},
-            "title": "Free Oxygen at Home",
-            "description": "Free Oxygen at home for patients via Project StepOne",
+            "title": "Oxygen at Home via Project StepOne",
+            "description": "Request for Oxygen at home for patients in Bangalore, Delhi and Mumbai",
             "groups": [
                 {
                     "fields": [
