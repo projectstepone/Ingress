@@ -1,12 +1,12 @@
-const requestForHospitalBedsFromStepone = {
-    "id": "request-for-hospital-beds-from-stepone",
+const oxygenAtHomeforBlrBomDelFromStepone = {
+    "id": "oxygen-at-home-blr-bom-del-from-stepone",
     "item": [
         {
             "devNote": "",
             "Header": {},
             "Footer": {},
-            "title": "Hospital Beds",
-            "description": "Request for Hospital beds via Project StepOne",
+            "title": "Free Oxygen at Home",
+            "description": "Free Oxygen at home for patients via Project StepOne",
             "groups": [
                 {
                     "fields": [
@@ -58,55 +58,8 @@ const requestForHospitalBedsFromStepone = {
                             "label": "City",
                             "id": "city",
                             "description": null,
-                            "type": "short_answer",
-                            "args": [],
-                            "validators": [],
-                            "answerType": [],
-                            "required": true
-                        },
-                        {
-                            "label": "State",
-                            "id": "state",
-                            "description": null,
                             "type": "dropdown",
-                            "args": [
-                                "Andhra Pradesh",
-                                "Arunachal Pradesh",
-                                "Assam",
-                                "Bihar",
-                                "Chhattisgarh",
-                                "Goa",
-                                "Gujarat",
-                                "Haryana",
-                                "Himachal Pradesh",
-                                "Jammu and Kashmir",
-                                "Jharkhand",
-                                "Karnataka",
-                                "Kerala",
-                                "Madhya Pradesh",
-                                "Maharashtra",
-                                "Manipur",
-                                "Meghalaya",
-                                "Mizoram",
-                                "Nagaland",
-                                "Odisha",
-                                "Punjab",
-                                "Rajasthan",
-                                "Sikkim",
-                                "Tamil Nadu",
-                                "Telangana",
-                                "Tripura",
-                                "Uttarakhand",
-                                "Uttar Pradesh",
-                                "West Bengal",
-                                "Andaman and Nicobar Islands",
-                                "Chandigarh",
-                                "Dadra and Nagar Haveli",
-                                "Daman and Diu",
-                                "Delhi",
-                                "Lakshadweep",
-                                "Puducherry"
-                            ],
+                            "args": ["Bangalore", "Mumbai", "Delhi"],
                             "validators": [],
                             "answerType": [],
                             "required": true
@@ -198,7 +151,7 @@ const requestForHospitalBedsFromStepone = {
                             "required": true
                         },
                         {
-                            "label": "If any, What are the patient's comorbidities ?",
+                            "label": "If any, What are the patient's co-morbidities ?",
                             "id": "comorbidity",
                             "description": null,
                             "type": "paragraph",
@@ -273,8 +226,8 @@ const requestForHospitalBedsFromStepone = {
                             "required": true
                         },
                         {
-                            "label": "Would you be able to pay for a Private hospital bed ?",
-                            "id": "payingCapacityForPrivateHospital",
+                            "label": "Do you have a BPL card ?",
+                            "id": "haveBPLCard",
                             "description": null,
                             "type": "dropdown",
                             "args": [
@@ -285,22 +238,6 @@ const requestForHospitalBedsFromStepone = {
                             "answerType": [],
                             "required": true
                         },
-                        {
-                            "label": "What is the type of Bed required ?",
-                            "id": "requiredBedType",
-                            "description": null,
-                            "type": "dropdown",
-                            "args": [
-                                "Normal ward",
-                                "HDU (Oxygen)",
-                                "ICU",
-                                "ICU with Ventilator"
-                            ],
-                            "validators": [],
-                            "answerType": [],
-                            "required": true
-                        },
-
                         {
                             "label": "Requester Name",
                             "id": 'requesterName',
@@ -331,4 +268,4 @@ const requestForHospitalBedsFromStepone = {
 
 
 
-module.exports = requestForHospitalBedsFromStepone;
+module.exports = oxygenAtHomeforBlrBomDelFromStepone;
