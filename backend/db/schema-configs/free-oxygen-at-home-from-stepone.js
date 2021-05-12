@@ -209,7 +209,7 @@ const freeOxygenAtHomeFromStepone = {
                         },
 
                         {
-                            "label": "Are you vaccinated ?",
+                            "label": "is the patient vaccinated ?",
                             "id": "vaccineStatus",
                             "description": null,
                             "type": "dropdown",
@@ -223,7 +223,7 @@ const freeOxygenAtHomeFromStepone = {
                             "required": true
                         },
                         {
-                            "label": "What are your SPO2 levels ?",
+                            "label": "What is the patient's SPO2 level ?",
                             "id": "spo2level",
                             "description": null,
                             "type": "short_answer",
@@ -271,16 +271,6 @@ const freeOxygenAtHomeFromStepone = {
                             "validators": [],
                             "answerType": [],
                             "required": true
-                        },
-                        {
-                            "label": "Date of testing Covid Positive",
-                            "id": "positiveDate",
-                            "description": null,
-                            "type": "date",
-                            "args": [],
-                            "validators": [],
-                            "answerType": [],
-                            "required": false
                         },
                         {
                             "label": "Do you have a BPL card ?",
