@@ -295,6 +295,27 @@ const freeOxygenAtHomeFromStepone = {
                             "answerType": [],
                             "required": true
                         },
+                        {
+                            "label": "Requester Name",
+                            "id": 'requesterName',
+                            "description": null,
+                            "type": "short_answer",
+                            "args": [],
+                            "validators": [],
+                            "answerType": [],
+                            "required": true
+                        },
+                        {
+                            "label": "Requester Contact Number",
+                            "id": 'requesterContactNumber',
+                            "description": null,
+                            "type": "short_answer",
+                            "args": [],
+                            "validators": [],
+                            "answerType": [],
+                            "required": true
+                        },
+
                     ]
                 }
             ]
