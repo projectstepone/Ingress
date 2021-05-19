@@ -1,5 +1,5 @@
 # base image
-FROM node:14
+FROM node:10
 
 ENV PATH node_modules/.bin:$PATH
 
