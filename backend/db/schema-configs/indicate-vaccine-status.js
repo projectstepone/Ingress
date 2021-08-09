@@ -56,7 +56,7 @@ const indicateVaccineStatus = {
                         },
 
                         {
-                            "label": "Type of Vaccine received",
+                            "label": "If received, Type of Vaccine received",
                             "id": "vaccineType",
                             "description": null,
                             "type": "dropdown",
@@ -76,7 +76,7 @@ const indicateVaccineStatus = {
                             "required": false
                         },
                         {
-                            "label": "Date Of First Dose",
+                            "label": "If received, Date Of First Dose",
                             "id": "dateOfFirstDose",
                             "description": null,
                             "type": "date",
@@ -86,7 +86,7 @@ const indicateVaccineStatus = {
                             "required": false
                         },
                         {
-                            "label": "Date Of Second Dose",
+                            "label": "If received, Date Of Second Dose",
                             "id": "dateOfSecondDose",
                             "description": null,
                             "type": "date",
