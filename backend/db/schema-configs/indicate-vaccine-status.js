@@ -12,7 +12,7 @@ const indicateVaccineStatus = {
                     "fields": [
                         {
                             "label": "Name",
-                            "id": "patientName",
+                            "id": "name",
                             "description": null,
                             "type": "short_answer",
                             "args": [],
