@@ -5,8 +5,8 @@ const indicateVaccineStatus = {
             "devNote": "Janssen requires only one dose; ",
             "Header": {},
             "Footer": {},
-            "title": "Update Vaccine Status",
-            "description": "Update your vaccine status with Stepone",
+            "title": "Update Vaccincation Status",
+            "description": "Update your vaccination status with Stepone",
             "groups": [
                 {
                     "fields": [
