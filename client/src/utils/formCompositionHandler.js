@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from "prop-types";
 
-import { Form, Input, Checkbox, Radio, Row, Col, Select, DatePicker, TimePicker } from 'antd';
+import { Form, Input, Checkbox, Radio, Row, Col, Select, DatePicker, TimePicker, Divider } from 'antd';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -38,6 +38,20 @@ const formCompositionHandler = ( props ) => {
 
             {( () => {
                 switch ( fieldContext.type ) {
+                    case "html":
+                        return (
+                            <div>
+                                {fieldContext.args.map( ( option, key ) => (
+                                    <div id={`${fieldContext.id}-${key}`} key={`${fieldContext.id}-${key}`} className={`injected-html ${fieldContext.id}-${key}`} dangerouslySetInnerHTML={{ __html: option }} />
+                                ) )}
+                            </div>
+                        );
+                    case "divider":
+                        return (
+                            <div>
+                                <Divider />
+                            </div>
+                        );
                     case "short_answer":
                         return (
                             <div>
